@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -17,7 +18,7 @@ const generator_1 = require("./generator");
 const prompt_1 = require("./prompt");
 const args = process.argv.slice(2);
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    if (args.includes('--init')) {
+    if (args.includes('--project-init')) {
         console.log(chalk_1.default.cyan('\n🚀 Lifetech Project Initializer\n'));
         const answers = yield (0, prompt_1.promptInit)();
         yield (0, generator_1.generateProject)(answers);

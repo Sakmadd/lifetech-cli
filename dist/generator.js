@@ -18,26 +18,35 @@ const ora_1 = __importDefault(require("ora"));
 const chalk_1 = __importDefault(require("chalk"));
 const path_1 = __importDefault(require("path"));
 const TEMPLATE_MAP = {
-    'auth gateway': 'lifetech/templates/auth-gateway',
-    'tenant project': 'lifetech/templates/tenant-project',
-    others: 'lifetech/templates/default',
+    'auth gateway': '404',
+    'tenant project': 'Sakmadd/lifetech-template/tenant-project-template',
+    others: '404',
 };
 function generateProject(_a) {
     return __awaiter(this, arguments, void 0, function* ({ type, name }) {
         const spinner = (0, ora_1.default)('Cloning project template...').start();
-        const repoPath = TEMPLATE_MAP[type] || TEMPLATE_MAP['others'];
+        const basePath = TEMPLATE_MAP[type];
+        if (!basePath) {
+            spinner.fail(`Template "${type}" not found`);
+            console.log('Available templates:', Object.keys(TEMPLATE_MAP));
+            return;
+        }
+        const repoPath = basePath;
         const emitter = (0, degit_1.default)(repoPath, {
             cache: false,
             force: true,
-            verbose: false,
+            verbose: true,
         });
         const targetDir = path_1.default.resolve(process.cwd(), name);
         try {
             yield emitter.clone(targetDir);
-            spinner.succeed(`Project "${chalk_1.default.green(name)}" created at ${chalk_1.default.cyan(targetDir)}`);
+            spinner.succeed(chalk_1.default.bold('Project initialized!'));
+            console.log(`\nNext steps, try to:\n${chalk_1.default.cyan(`\ncd ${name}\n`)}\n${chalk_1.default.cyan('npm install\n')}\n${chalk_1.default.cyan('npm run dev\n')}
+    `);
         }
         catch (err) {
             spinner.fail('Failed to fetch template');
+            console.log(type, name);
             console.error(err);
         }
     });
