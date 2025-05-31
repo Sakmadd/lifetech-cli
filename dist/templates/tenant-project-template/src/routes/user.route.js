@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const user_conrtoller_1 = require("../controllers/user.conrtoller");
+const user_service_1 = require("../services/user.service");
+const express_1 = require("express");
+const prisma_1 = require("../../generated/prisma");
+const router = (0, express_1.Router)();
+const prisma = new prisma_1.PrismaClient();
+const userService = new user_service_1.UserService(prisma);
+const userController = new user_conrtoller_1.UserController(userService);
+router.post('/internal/sync', userController.SyncUser);
+exports.default = router;
