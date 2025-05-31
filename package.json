@@ -6,7 +6,7 @@
     "lib": "lib"
   },
   "bin": {
-    "lifetech": "./dist/src/bin.js"
+    "lifetech": "./dist/bin.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
