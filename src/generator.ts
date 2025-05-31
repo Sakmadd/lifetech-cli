@@ -7,7 +7,7 @@ import { InitAnswers } from './prompt';
 
 const TEMPLATE_MAP: Record<string, string> = {
   'auth gateway': 'lifetech/templates/auth-gateway',
-  'tenant project': 'lifetech/templates/tenant-project',
+  'tenant project': '/templates/tenant-project-template',
   others: 'lifetech/templates/default',
 };
 
